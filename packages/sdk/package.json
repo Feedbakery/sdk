@@ -1,0 +1,81 @@
+{
+  "name": "@feedbakery/sdk",
+  "version": "0.1.0",
+  "description": "Embed a Feedbakery feedback board on any website",
+  "license": "MIT",
+  "homepage": "https://feedbakery.io",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/feedbakery/sdk.git"
+  },
+  "bugs": {
+    "url": "https://github.com/feedbakery/sdk/issues"
+  },
+  "keywords": [
+    "feedbakery",
+    "feedback",
+    "embed",
+    "widget",
+    "iframe",
+    "feature-requests",
+    "roadmap"
+  ],
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    },
+    "./element": {
+      "types": "./src/element.ts",
+      "default": "./src/element.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "main": "./dist/index.cjs",
+    "module": "./dist/index.mjs",
+    "types": "./dist/index.d.ts",
+    "unpkg": "./dist/feedbakery.iife.js",
+    "jsdelivr": "./dist/feedbakery.iife.js",
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "import": "./dist/index.mjs",
+        "require": "./dist/index.cjs"
+      },
+      "./element": {
+        "types": "./dist/element.d.ts",
+        "import": "./dist/element.mjs"
+      },
+      "./package.json": "./package.json"
+    }
+  },
+  "sideEffects": [
+    "./dist/feedbakery.iife.js",
+    "./dist/element.mjs",
+    "./src/element.ts"
+  ],
+  "scripts": {
+    "build": "vite build --mode esm && vite build --mode cjs && vite build --mode iife && vite build --mode element && tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "prepublishOnly": "pnpm run typecheck && pnpm run test && pnpm run build && node ../../scripts/check-sdk-publish.mjs sdk"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "jsdom": "^25.0.1",
+    "typescript": "^5.9.3",
+    "vite": "^7.2.4",
+    "vitest": "^2.1.0"
+  }
+}

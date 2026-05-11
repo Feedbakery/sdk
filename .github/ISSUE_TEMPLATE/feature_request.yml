@@ -1,0 +1,40 @@
+name: Feature request
+description: Suggest an addition or change to the SDK
+labels: [enhancement, triage]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The SDK is intentionally small. Before proposing a new API, please describe the **use case** — we may be able to solve it without expanding the surface.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem are you trying to solve?
+      description: Describe the situation in your application that led you here. What are you trying to do that's currently hard or impossible?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: If you have a concrete API or behavior in mind, describe it. Otherwise leave blank.
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Are there workarounds you've tried? Why don't they work?
+
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Which package?
+      options:
+        - "@feedbakery/sdk"
+        - "@feedbakery/react"
+        - New framework wrapper (Vue / Svelte / etc.)
+        - Not sure
+    validations:
+      required: true

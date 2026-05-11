@@ -1,0 +1,93 @@
+name: Publish
+
+# Triggers:
+#   sdk-v0.1.0          → publishes @feedbakery/sdk
+#   react-v0.1.0        → publishes @feedbakery/react
+#   sdk-v0.1.0+react    → publishes both
+#   workflow_dispatch   → manual, with package + dry_run inputs
+#
+# Required secret:
+#   NPM_TOKEN — automation token with publish rights on the @feedbakery scope.
+
+on:
+  push:
+    tags:
+      - 'sdk-v*'
+      - 'react-v*'
+  workflow_dispatch:
+    inputs:
+      package:
+        description: 'Package to publish'
+        required: true
+        type: choice
+        options: [sdk, react, both]
+      dry_run:
+        description: 'Dry run (do not publish)'
+        required: false
+        type: boolean
+        default: true
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write   # for npm provenance
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.33.0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Resolve target package(s)
+        id: target
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "package=${{ github.event.inputs.package }}" >> "$GITHUB_OUTPUT"
+            echo "dry_run=${{ github.event.inputs.dry_run }}" >> "$GITHUB_OUTPUT"
+          else
+            case "${{ github.ref_name }}" in
+              sdk-v*+react)   echo "package=both" >> "$GITHUB_OUTPUT" ;;
+              sdk-v*)         echo "package=sdk"  >> "$GITHUB_OUTPUT" ;;
+              react-v*)       echo "package=react" >> "$GITHUB_OUTPUT" ;;
+            esac
+            echo "dry_run=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm typecheck
+      - run: pnpm test
+      - run: pnpm build
+
+      - name: Check SDK publish readiness
+        if: steps.target.outputs.package == 'sdk' || steps.target.outputs.package == 'both'
+        run: node scripts/check-sdk-publish.mjs sdk
+
+      - name: Check React publish readiness
+        if: steps.target.outputs.package == 'react' || steps.target.outputs.package == 'both'
+        run: node scripts/check-sdk-publish.mjs react
+
+      - name: Publish @feedbakery/sdk
+        if: (steps.target.outputs.package == 'sdk' || steps.target.outputs.package == 'both') && steps.target.outputs.dry_run != 'true'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: pnpm -F @feedbakery/sdk publish --access public --no-git-checks --provenance
+
+      - name: Publish @feedbakery/react
+        if: (steps.target.outputs.package == 'react' || steps.target.outputs.package == 'both') && steps.target.outputs.dry_run != 'true'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: pnpm -F @feedbakery/react publish --access public --no-git-checks --provenance
+
+      - name: Dry run notice
+        if: steps.target.outputs.dry_run == 'true'
+        run: echo "::notice::Dry run complete — all gates passed. Re-run with dry_run=false to publish."

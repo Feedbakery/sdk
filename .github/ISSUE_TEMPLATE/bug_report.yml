@@ -1,0 +1,79 @@
+name: Bug report
+description: Report a bug in @feedbakery/sdk or @feedbakery/react
+labels: [bug, triage]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to file a bug! Please fill in as much as you can — minimal reproductions get fixed fastest.
+
+  - type: dropdown
+    id: package
+    attributes:
+      label: Package
+      description: Which package is affected?
+      options:
+        - "@feedbakery/sdk"
+        - "@feedbakery/react"
+        - Both / unsure
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Package version
+      description: The version of the affected package (e.g. 0.1.0). Run `npm ls @feedbakery/sdk` to find it.
+      placeholder: 0.1.0
+    validations:
+      required: true
+
+  - type: dropdown
+    id: usage
+    attributes:
+      label: Usage mode
+      options:
+        - Bundler (Vite / webpack / Next.js / etc.)
+        - "<script> tag from CDN"
+        - Web component (<feedbakery-board>)
+        - React component (<FeedbakeryBoard />)
+    validations:
+      required: true
+
+  - type: input
+    id: browser
+    attributes:
+      label: Browser + version
+      placeholder: Chrome 132 / Safari 18 / Firefox 134
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: Minimal reproduction
+      description: A CodeSandbox, StackBlitz, or GitHub repo that reproduces the issue. This is the single most useful thing you can provide.
+      placeholder: https://codesandbox.io/...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: Include any console errors or network failures.
+    validations:
+      required: true
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: Anything else?
+      description: Logs, screenshots, theories, related issues — anything you think is relevant.

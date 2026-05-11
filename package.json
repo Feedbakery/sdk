@@ -1,0 +1,31 @@
+{
+  "name": "feedbakery-sdk",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Monorepo for the Feedbakery SDK and React wrapper",
+  "homepage": "https://feedbakery.io",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/feedbakery/sdk.git"
+  },
+  "bugs": {
+    "url": "https://github.com/feedbakery/sdk/issues"
+  },
+  "license": "MIT",
+  "type": "module",
+  "packageManager": "pnpm@10.33.0",
+  "scripts": {
+    "build": "turbo run build",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "check": "node scripts/check-sdk-publish.mjs sdk && node scripts/check-sdk-publish.mjs react",
+    "verify": "pnpm typecheck && pnpm test && pnpm build && pnpm check"
+  },
+  "devDependencies": {
+    "turbo": "^2.9.4",
+    "typescript": "^5.9.3"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": ["esbuild"]
+  }
+}
