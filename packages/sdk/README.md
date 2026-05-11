@@ -6,6 +6,8 @@ Embed a Feedbakery feedback board on any website. The SDK renders an iframe poin
 npm install @feedbakery/sdk
 ```
 
+> **Using React?** Use [`@feedbakery/react`](https://www.npmjs.com/package/@feedbakery/react) — the official React 18/19 component wrapper built on this SDK. Same options, idiomatic JSX, no manual `useEffect` plumbing.
+
 ## Quick start
 
 ### Bundlers (Vite, webpack, Next.js, etc.)

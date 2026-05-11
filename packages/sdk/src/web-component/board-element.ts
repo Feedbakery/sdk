@@ -95,6 +95,27 @@ class FeedbakeryBoardElement extends HTMLElement {
   }
 }
 
+/**
+ * Register the `<feedbakery-board>` custom element with the browser's
+ * `CustomElementRegistry`. Idempotent — safe to call multiple times.
+ *
+ * Already invoked automatically by the IIFE bundle (`feedbakery.iife.js`) and
+ * by the `@feedbakery/sdk/element` side-effect entry. Call this manually only
+ * if you want to register under a different tag name.
+ *
+ * @example
+ * ```ts
+ * import { defineBoardElement } from '@feedbakery/sdk'
+ * defineBoardElement('my-feedback-board')
+ * ```
+ *
+ * ```html
+ * <my-feedback-board workspace="acme" board="feature-requests"></my-feedback-board>
+ * ```
+ *
+ * @param name — Custom element tag name. Defaults to `'feedbakery-board'`.
+ * @returns The {@link FeedbakeryBoardElement} class (for reference or extension).
+ */
 export const defineBoardElement = (
   name: string = TAG_NAME,
 ): typeof FeedbakeryBoardElement => {
@@ -107,4 +128,13 @@ export const defineBoardElement = (
   return FeedbakeryBoardElement
 }
 
+/**
+ * Custom element class implementing `<feedbakery-board>`. Exposes the same
+ * runtime methods as the {@link Board} handle returned by `createBoard`:
+ * `identify`, `on`, `off`.
+ *
+ * Observed attributes (all optional except `workspace` and `board`):
+ * `workspace`, `board`, `theme`, `locale`, `base-url`, `height`, `email`, `name`.
+ * Changing any observed attribute re-mounts the iframe.
+ */
 export { FeedbakeryBoardElement }

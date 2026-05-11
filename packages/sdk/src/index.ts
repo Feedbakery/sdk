@@ -11,4 +11,5 @@ export type {
   Theme,
 } from './types'
 
-export const VERSION = '0.1.0'
+/** Semver of this SDK build. Kept in sync with `package.json` at publish time. */
+export const VERSION = '0.1.1'

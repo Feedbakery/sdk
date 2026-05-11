@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.1
+
+- Added JSDoc to all public APIs (`createBoard`, `defineBoardElement`, `FeedbakeryBoardElement`, `Board`, `BoardConfig`, `IdentifyData`, `Theme`, event types) for richer IDE tooltips on hover.
+- README now points React users at `@feedbakery/react`.
+- No runtime changes — drop-in upgrade from 0.1.0.
+
 ## 0.1.0
 
 Initial public release.

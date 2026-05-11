@@ -1,10 +1,12 @@
 # @feedbakery/react
 
-React wrapper around [`@feedbakery/sdk`](https://www.npmjs.com/package/@feedbakery/sdk). Drop a Feedbakery feedback board into any React 18+ or 19 application.
+The official React 18/19 component wrapper for the [Feedbakery](https://feedbakery.io) feedback board. Built on [`@feedbakery/sdk`](https://www.npmjs.com/package/@feedbakery/sdk) — install both.
 
 ```bash
 npm install @feedbakery/react @feedbakery/sdk
 ```
+
+> **Not using React?** Use [`@feedbakery/sdk`](https://www.npmjs.com/package/@feedbakery/sdk) directly — it ships an `<feedbakery-board>` web component, a CDN-friendly IIFE bundle with auto-init via `<script>` tag, and a plain `createBoard()` function for any framework.
 
 ## Quick start
 

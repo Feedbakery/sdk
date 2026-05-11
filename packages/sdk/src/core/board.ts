@@ -130,4 +130,33 @@ class BoardImpl implements Board {
   }
 }
 
+/**
+ * Mount a Feedbakery feedback board into a DOM element.
+ *
+ * Creates a sandboxed iframe pointing at the configured Feedbakery host,
+ * appends it to `config.target`, and returns a {@link Board} handle for
+ * event subscription, identity updates, and lifecycle control.
+ *
+ * Must be called in a browser environment after the target element exists in
+ * the DOM. Throws if `workspace`, `board`, or `target` is missing.
+ *
+ * @example
+ * ```ts
+ * import { createBoard } from '@feedbakery/sdk'
+ *
+ * const board = createBoard({
+ *   workspace: 'acme',
+ *   board: 'feature-requests',
+ *   target: '#fbk-root',
+ *   theme: 'system',
+ * })
+ *
+ * board.on('ready', () => console.log('board ready'))
+ * // later:
+ * board.destroy()
+ * ```
+ *
+ * @param config — see {@link BoardConfig}
+ * @returns A {@link Board} handle to control the mounted iframe.
+ */
 export const createBoard = (config: BoardConfig): Board => new BoardImpl(config)
