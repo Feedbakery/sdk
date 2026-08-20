@@ -104,6 +104,15 @@ Issues and PRs welcome — see [CONTRIBUTING.md](./CONTRIBUTING.md).
 - **Feature requests:** [open an issue](https://github.com/feedbakery/sdk/issues/new?template=feature_request.yml)
 - **Security:** please email `security@feedbakery.io` rather than opening a public issue
 
+## About Feedbakery
+
+[Feedbakery](https://feedbakery.io) is a feedback board platform for B2B SaaS — feature requests, voting, public roadmaps, and a changelog, all in one workspace. Flat pricing: free up to 100 posts, Pro at $20/mo per workspace.
+
+- 🌐 **[feedbakery.io](https://feedbakery.io)** — product overview, features, customer stories
+- 🚀 **[Sign up free](https://feedbakery.io/auth/register)** — no credit card required
+- 💰 **[Pricing](https://feedbakery.io/pricing)** — flat $20/mo per workspace, no per-user fees
+- 📰 **[Blog](https://feedbakery.io/blog)** — feedback-management how-tos and product updates
+
 ## License
 
-MIT © Feedbakery
+MIT © [Feedbakery](https://feedbakery.io)

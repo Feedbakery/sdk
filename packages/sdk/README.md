@@ -1,6 +1,6 @@
 # @feedbakery/sdk
 
-Embed a Feedbakery feedback board on any website. The SDK renders an iframe pointing at your hosted Feedbakery board so users can browse, vote, and post — without leaving your site.
+Embed a [Feedbakery](https://feedbakery.io) feedback board on any website. The SDK renders an iframe pointing at your hosted Feedbakery board so users can browse, vote, and post — without leaving your site.
 
 ```bash
 npm install @feedbakery/sdk
@@ -117,6 +117,14 @@ The workspace must have iframe auth mode set to `open` for this to be accepted.
 
 HMAC-signed (Tier 2) and partner-token (Tier 3) flows are coming in v0.2.
 
+## About Feedbakery
+
+[Feedbakery](https://feedbakery.io) is a feedback board platform for B2B SaaS — feature requests, voting, public roadmaps, and a changelog, all in one workspace. Flat pricing: free up to 100 posts, Pro at $20/mo per workspace.
+
+- 🚀 **[Sign up free](https://feedbakery.io/auth/register)** — no credit card required
+- 💰 **[Pricing](https://feedbakery.io/pricing)** — flat $20/mo per workspace, no per-user fees
+- 📦 **[GitHub](https://github.com/feedbakery/sdk)** — source, issues, releases
+
 ## License
 
-MIT © Feedbakery
+MIT © [Feedbakery](https://feedbakery.io)
